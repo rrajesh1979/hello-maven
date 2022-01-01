@@ -96,13 +96,13 @@ jobs:
     strategy:
       matrix:
         os: [ 'ubuntu-latest', 'macos-latest' ]
-        gu-binary: [ gu.cmd ]
+        gu-binary: [ gu ]
         include:
           - os: 'ubuntu-latest'
-            gu-binary: gu.cmd
+            gu-binary: gu
             label: 'linux'
           - os: 'macos-latest'
-            gu-binary: gu.cmd
+            gu-binary: gu
             label: 'mac'
     runs-on: ${{matrix.os}}
 
