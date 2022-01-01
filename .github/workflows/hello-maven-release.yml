@@ -98,9 +98,9 @@ jobs:
         os: [ 'ubuntu-latest', 'macos-latest' ]
         gu-binary: [ gu ]
         include:
-          - os: 'ubuntu-latest'
-            gu-binary: gu
-            label: 'linux'
+#          - os: 'ubuntu-latest'
+#            gu-binary: gu
+#            label: 'linux'
           - os: 'macos-latest'
             gu-binary: gu
             label: 'mac'
@@ -132,6 +132,11 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
+      - run: |
+          ls -a
+          tree -L 3
+          cat upload_url.txt
 
       - name: 'Get JAR Artifact'
         uses: actions/download-artifact@v2-preview
