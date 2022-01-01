@@ -6,45 +6,6 @@ on:
     branches:
       - 'master'
 jobs:
-  build-jar-job:
-    name: 'Build JAR'
-    runs-on: ubuntu-latest
-    env:
-      working-dir: ./hello-maven-build-dir
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-
-      - name: 'Setup Java 17'
-        uses: actions/setup-java@v1
-        with:
-          java-version: 17
-          cache: 'maven'
-
-      - name: 'Build JAR'
-        run: |
-          ./mvnw clean package -DskipTests
-
-      - name: 'Publish JAR'
-        uses: actions/upload-artifact@v2-preview
-        with:
-          name: 'hello-maven-release'
-          path: /home/runner/work/hello-maven/hello-maven/target/hello-maven*.jar
-
-      - name: 'Archive'
-        uses: thedoctor0/zip-release@master
-        with:
-          filename: hello-maven-release.zip
-
-      - run: echo "github.ref is " ${{github.ref}}
-
-
-      - run: |
-          ls -a
-          tree -L 3
-          cat upload_url.txt
-          
-
   build-non-windows-image:
     name: 'Build Non-Windows Image'
     needs: [ build-jar-job ]
