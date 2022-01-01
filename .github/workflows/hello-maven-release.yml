@@ -41,6 +41,8 @@ jobs:
         with:
           file-name: hello-maven-release.zip
 
+      - run: echo "github.ref is " github.ref
+
       - name: 'Create Release'
         if: contains(github.ref, 'v')
         id: create_release
