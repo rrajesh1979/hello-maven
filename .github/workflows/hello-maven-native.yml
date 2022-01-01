@@ -55,7 +55,6 @@ jobs:
 #
       - run: |
           ls -a
-          tree -L 3
 
       - name: 'Build Native Image'
         run: |
