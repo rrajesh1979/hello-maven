@@ -95,7 +95,7 @@ jobs:
     needs: [ build-jar-job ]
     strategy:
       matrix:
-        os: [ 'ubuntu-latest', 'macos-latest' ]
+        os: [ 'macos-latest' ] #'ubuntu-latest',
         gu-binary: [ gu ]
         include:
 #          - os: 'ubuntu-latest'
@@ -138,10 +138,10 @@ jobs:
           tree -L 3
           cat upload_url.txt
 
-      - name: 'Get JAR Artifact'
-        uses: actions/download-artifact@v2-preview
-        with:
-          name: 'hello-maven-1.0-SNAPSHOT.jar'
+#      - name: 'Get JAR Artifact'
+#        uses: actions/download-artifact@v2-preview
+#        with:
+#          name: 'hello-maven-1.0-SNAPSHOT.jar'
 
       - name: 'Get Release URL'
         # if: contains(github.ref, 'v')
