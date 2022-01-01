@@ -8,7 +8,6 @@ on:
 jobs:
   build-non-windows-image:
     name: 'Build Non-Windows Image'
-    needs: [ build-jar-job ]
     strategy:
       matrix:
         os: [ 'macos-latest' ] #'ubuntu-latest',
