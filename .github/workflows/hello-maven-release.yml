@@ -58,9 +58,9 @@ jobs:
           GITHUB_TOKEN: ${{secrets.RELEASE_TOKEN}}
         with:
           upload_url: ${{steps.create_release.outputs.upload_url}}
-          asset_path: target/hello-maven*.jar
-          asset_name: hello-maven-${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.0.jar
-          asset_content_type: application/java-archive
+          asset_path: /home/runner/work/hello-maven/hello-maven/target/hello-maven-release.zip
+          asset_name: hello-maven-release.zip
+          asset_content_type: application/zip #java-archive
 
       - name: 'Write Upload URL To File'
 #        if: contains(github.ref, 'v')
