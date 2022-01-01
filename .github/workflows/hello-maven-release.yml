@@ -41,6 +41,15 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: 'Maven Release'
+        uses: qcastel/github-actions-maven-release@master
+        with:
+          access-token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          maven-release-version-number: ${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.0
+          # version-minor: true
+          git-release-bot-name: "release-bot"
+          git-release-bot-email: "release-bot@rrajesh1979.com"
+
       - name: 'Upload Release Asset'
 #        if: contains(github.ref, 'v')
         id: upload-release-asset
@@ -49,8 +58,8 @@ jobs:
           GITHUB_TOKEN: ${{secrets.RELEASE_TOKEN}}
         with:
           upload_url: ${{steps.create_release.outputs.upload_url}}
-          asset_path: /home/runner/work/hello-maven/hello-maven/target/hello-maven*.jar
-          asset_name: hello-maven.jar
+          asset_path: target/hello-maven*.jar
+          asset_name: hello-maven-${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.0.jar
           asset_content_type: application/java-archive
 
       - name: 'Write Upload URL To File'
