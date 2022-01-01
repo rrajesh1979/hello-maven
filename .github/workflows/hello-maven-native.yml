@@ -1,4 +1,4 @@
-name: hello-maven-release
+name: hello-maven-native
 on:
   push:
     tags:
