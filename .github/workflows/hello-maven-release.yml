@@ -133,37 +133,21 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - run: |
-          ls -a
-#          tree -L 3
-#          cat upload_url.txt
-
 #      - name: 'Get JAR Artifact'
 #        uses: actions/download-artifact@v2-preview
 #        with:
 #          name: 'hello-maven-1.0-SNAPSHOT.jar'
 
-      - name: 'Get Release URL'
-        # if: contains(github.ref, 'v')
-        uses: actions/download-artifact@v2-preview
-        with:
-          name: 'upload_url.txt'
-
-      - name: 'Get Upload URL'
-        # if: contains(github.ref, 'v')
-        run: |
-          echo "::set-env name=UPLOAD_URL::$(cat upload_url.txt)"
-
       - name: 'Build Native Image'
         run: |
           ./mvnw -B --file pom.xml -Pnative package
-#          native-image \
-#          --no-server \
-#          --no-fallback \
-#          # -H:ReflectionConfigurationResources=reflection-config.json \
-#          # -H:IncludeResources=logback.xml \
-#          --allow-incomplete-classpath \
-#          -jar hello-maven-1.0-SNAPSHOT.jar
+      #          native-image \
+      #          --no-server \
+      #          --no-fallback \
+      #          # -H:ReflectionConfigurationResources=reflection-config.json \
+      #          # -H:IncludeResources=logback.xml \
+      #          --allow-incomplete-classpath \
+      #          -jar hello-maven-1.0-SNAPSHOT.jar
 
       - name: 'Publish Native Image'
         if: success()
@@ -171,6 +155,21 @@ jobs:
         with:
           name: 'hello-maven-${{matrix.label}}'
           path: 'hello-maven-all'
+
+      - name: 'Get Release URL'
+        # if: contains(github.ref, 'v')
+        uses: actions/download-artifact@v2-preview
+        with:
+          name: 'upload_url.txt'
+
+      - run: |
+          ls -a
+          cat upload_url.txt
+
+      - name: 'Get Upload URL'
+        # if: contains(github.ref, 'v')
+        run: |
+          echo "::set-env name=UPLOAD_URL::$(cat upload_url.txt)"
 
       - name: 'Release Native Image Asset'
         if: success() ##&& contains(github.ref, 'v')
