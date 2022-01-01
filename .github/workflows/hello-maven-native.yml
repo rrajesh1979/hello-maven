@@ -64,3 +64,34 @@ jobs:
 
       - run: |
           ls -a
+
+      - name: 'Create Release'
+        #        if: contains(github.ref, 'v')
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          tag_name: v${{github.run_number}}
+          release_name: Hello Maven Native Release V${{github.run_number}}
+          body: |
+            Initial release
+          draft: false
+          prerelease: false
+
+      - name: 'Archive'
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: hello-maven-release.zip
+
+      - name: 'Upload Release Asset'
+        #        if: contains(github.ref, 'v')
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          upload_url: ${{steps.create_release.outputs.upload_url}}
+          asset_path: ./hello-maven-release.zip
+          asset_name: hello-maven-v${{github.run_number}}.zip
+          asset_content_type: application/zip
