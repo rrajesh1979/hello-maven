@@ -96,6 +96,7 @@ jobs:
     strategy:
       matrix:
         os: [ 'ubuntu-latest', 'macos-latest' ]
+        gu-binary: [ gu, gu.cmd ]
         include:
           - os: 'ubuntu-latest'
             label: 'linux'
