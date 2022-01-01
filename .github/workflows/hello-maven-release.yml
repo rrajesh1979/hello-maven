@@ -49,7 +49,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.RELEASE_TOKEN}}
         with:
           upload_url: ${{steps.create_release.outputs.upload_url}}
-          asset_path: target/hello-maven-release.jar
+          asset_path: /home/runner/work/hello-maven/hello-maven/target/hello-maven*.jar
           asset_name: hello-maven.jar
           asset_content_type: application/java-archive
 
