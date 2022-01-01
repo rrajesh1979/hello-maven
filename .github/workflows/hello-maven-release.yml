@@ -113,14 +113,22 @@ jobs:
           java-version: 17
           cache: 'maven'
 
-      - name: 'Setup GraalVM Environment'
-        uses: DeLaGuardo/setup-graalvm@2.0
+      - name: 'Set up Graal'
+        uses: DeLaGuardo/setup-graalvm@5.0
         with:
-          graalvm-version: '20.1.0.java11'
+          graalvm: '21.3.0'
+          java: 'java17'
 
-      - name: 'Install Native Image Plugin'
+      - name: 'Install native-image component'
         run: |
-          gu install native-image
+          ${{ matrix.gu-binary }} install native-image
+
+      - name: 'Cache Maven packages'
+        uses: actions/cache@v2.1.7
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
       - name: 'Get JAR Artifact'
         uses: actions/download-artifact@v2-preview
@@ -140,13 +148,14 @@ jobs:
 
       - name: 'Build Native Image'
         run: |
-          native-image \
-          --no-server \
-          --no-fallback \
-          # -H:ReflectionConfigurationResources=reflection-config.json \
-          # -H:IncludeResources=logback.xml \
-          --allow-incomplete-classpath \
-          -jar hello-maven-1.0-SNAPSHOT.jar
+          ./mvnw -B --file pom.xml -Pnative package
+#          native-image \
+#          --no-server \
+#          --no-fallback \
+#          # -H:ReflectionConfigurationResources=reflection-config.json \
+#          # -H:IncludeResources=logback.xml \
+#          --allow-incomplete-classpath \
+#          -jar hello-maven-1.0-SNAPSHOT.jar
 
       - name: 'Publish Native Image'
         if: success()
