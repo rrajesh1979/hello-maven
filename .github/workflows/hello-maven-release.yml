@@ -135,8 +135,8 @@ jobs:
 
       - run: |
           ls -a
-          tree -L 3
-          cat upload_url.txt
+#          tree -L 3
+#          cat upload_url.txt
 
 #      - name: 'Get JAR Artifact'
 #        uses: actions/download-artifact@v2-preview
