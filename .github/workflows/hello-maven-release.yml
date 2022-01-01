@@ -39,7 +39,7 @@ jobs:
       - name: 'Archive'
         uses: thedoctor0/zip-release@master
         with:
-          file-name: hello-maven-release.zip
+          filename: hello-maven-release.zip
 
       - run: echo "github.ref is " ${{github.ref}}
 
