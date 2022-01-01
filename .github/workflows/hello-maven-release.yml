@@ -64,26 +64,43 @@ jobs:
         with:
           file-name: hello-maven-release.zip
 
-      - name: 'Create GitHub Release'
-        id: create_github_release
-        uses: actions/create-github-release@v1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Tag and prepare release
+        id: tag_and_prepare_release
+        uses: K-Phoen/semver-release-action@master
         with:
-          owner: rrajesh1979
-          repo: hello-maven
-          tag_name: v${{ github.run_number }}
-          release_name: Release V${{ github.run_number }}
-      - name: 'Upload asset to GitHub Release'
-        uses: actions/upload-release-asset@v1
+          release_branch: master
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release notes
+        if: steps.tag_and_prepare_release.outputs.tag
+        uses: Roang-zero1/github-create-release-action@master
         with:
-          upload_url: ${{ steps.create_github_release.outputs.upload_url }}
-          asset_path: ./hello-maven-release.zip
-          asset_name: hello-maven-v${{ github.run_number }}.zip
-          asset_content_type: application/zip
-          asset_label: hello-maven-v${{ github.run_number }}.zip
+          created_tag: ${{ steps.tag_and_prepare_release.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#      - name: 'Create GitHub Release'
+#        id: create_github_release
+#        uses: actions/create-github-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+#        with:
+#          owner: rrajesh1979
+#          repo: hello-maven
+#          tag_name: v${{ github.run_number }}
+#          release_name: Release V${{ github.run_number }}
+#
+#      - name: 'Upload asset to GitHub Release'
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+#        with:
+#          upload_url: ${{ steps.create_github_release.outputs.upload_url }}
+#          asset_path: ./hello-maven-release.zip
+#          asset_name: hello-maven-v${{ github.run_number }}.zip
+#          asset_content_type: application/zip
+#          asset_label: hello-maven-v${{ github.run_number }}.zip
 
 
 #      - name: 'Upload Release Asset'
