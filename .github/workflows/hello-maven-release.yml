@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
+          cache: 'maven'
+
       - name: 'Build JAR'
         run: |
           ./mvnw clean package -DskipTests
@@ -58,7 +60,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.RELEASE_TOKEN}}
         with:
           upload_url: ${{steps.create_release.outputs.upload_url}}
-          asset_path: /home/runner/work/hello-maven/hello-maven/target/hello-maven-release.zip
+          asset_path: target/hello-maven-release.zip
           asset_name: hello-maven-release.zip
           asset_content_type: application/zip #java-archive
 
