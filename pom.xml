@@ -349,8 +349,8 @@
                             <mainClass>org.rrajesh1979.demo.HelloMaven</mainClass>
                             <buildArgs>
                                 <buildArg>--no-fallback</buildArg>
-<!--                                <buildArg>-H:+ReportExceptionStackTraces</buildArg>-->
-<!--                                <buildArg>&#45;&#45;verbose</buildArg>-->
+                                <buildArg>-H:+ReportExceptionStackTraces</buildArg>
+                                <buildArg>--verbose</buildArg>
                             </buildArgs>
                         </configuration>
                     </plugin>
