@@ -266,6 +266,15 @@
                 </configuration>
             </plugin>
 
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <configuration>
+                    <scmCommentPrefix>[ci skip]</scmCommentPrefix>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -356,5 +365,12 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <scm>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
+        <url>https://github.com/rrajesh1979/hello-maven.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
 </project>
