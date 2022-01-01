@@ -76,6 +76,7 @@ jobs:
 #        if: steps.tag_and_prepare_release.outputs.tag
         uses: Roang-zero1/github-create-release-action@master
         with:
+          tag_name: v${{ github.run_number }}
           version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
