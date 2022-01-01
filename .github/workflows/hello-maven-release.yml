@@ -27,7 +27,7 @@ jobs:
           name: 'hello-maven-release'
           path: /home/runner/work/hello-maven/hello-maven/target/hello-maven*.jar
 
-      - name: 'Create Release'
+      - name: 'Create Release Version'
         if: contains(github.ref, 'v')
         id: create_release
         uses: actions/create-release@v1
