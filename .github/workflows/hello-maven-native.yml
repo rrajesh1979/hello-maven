@@ -48,31 +48,19 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-#      - name: 'Download asset'
-#        uses: actions/download-artifact@v2
-#        with:
-#          name: hello-maven-release
-#
       - run: |
           ls -a
 
       - name: 'Build Native Image'
         run: |
           ./mvnw -B --file pom.xml -Pnative package
-#            native-image \
-#            --no-server \
-#            --no-fallback \
-#            # -H:ReflectionConfigurationResources=reflection-config.json \
-#            # -H:IncludeResources=logback.xml \
-#            --allow-incomplete-classpath \
-#            -jar hello-maven-1.0-SNAPSHOT.jar
 
       - name: 'Publish Native Image'
         if: success()
         uses: actions/upload-artifact@v2-preview
         with:
           name: 'hello-maven-${{matrix.label}}'
-          path: 'hello-maven-all'
+          path: ./target/hello-maven
 
       - run: |
           ls -a
