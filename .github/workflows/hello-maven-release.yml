@@ -36,6 +36,10 @@ jobs:
         with:
           name: hello-maven-release
 
+      - run: |
+        ls -a
+        tree -L 3
+
       - name: 'Archive'
         uses: thedoctor0/zip-release@master
         with:
