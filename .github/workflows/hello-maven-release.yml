@@ -31,19 +31,19 @@ jobs:
           name: 'hello-maven-release'
           path: /home/runner/work/hello-maven/hello-maven/target/hello-maven*.jar
 
-      - name: 'Create Release Version'
-#        if: contains(github.ref, 'v')
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{secrets.RELEASE_TOKEN}}
-        with:
-          tag_name: ${{github.ref}}
-          release_name: Release ${{github.ref}}
-          body: |
-            Initial release
-          draft: false
-          prerelease: false
+#      - name: 'Create Release Version'
+##        if: contains(github.ref, 'v')
+#        id: create_release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{secrets.RELEASE_TOKEN}}
+#        with:
+#          tag_name: ${{github.ref}}
+#          release_name: Release ${{github.ref}}
+#          body: |
+#            Initial release
+#          draft: false
+#          prerelease: false
 
 #      - name: 'Maven Release'
 #        uses: qcastel/github-actions-maven-release@master
@@ -54,29 +54,61 @@ jobs:
 #          git-release-bot-name: "release-bot"
 #          git-release-bot-email: "release-bot@rrajesh1979.com"
 
-      - name: 'Upload Release Asset'
-#        if: contains(github.ref, 'v')
-        id: upload-release-asset
+      - name: 'Download asset'
+        uses: actions/download-artifact@v2
+        with:
+          name: hello-maven-release
+
+      - name: 'Archive'
+        uses: thedoctor0/zip-release@master
+        with:
+          file-name: hello-maven-release.zip
+
+      - name: 'Create GitHub Release'
+        id: create_github_release
+        uses: actions/create-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          owner: rrajesh1979
+          repo: hello-maven
+          tag_name: v${{ github.run_number }}
+          release_name: Release V${{ github.run_number }}
+      - name: 'Upload asset to GitHub Release'
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{secrets.RELEASE_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
-          upload_url: ${{steps.create_release.outputs.upload_url}}
-          asset_path: target/hello-maven-release.zip
-          asset_name: hello-maven-release.zip
-          asset_content_type: application/zip #java-archive
+          upload_url: ${{ steps.create_github_release.outputs.upload_url }}
+          asset_path: ./hello-maven-release.zip
+          asset_name: hello-maven-v${{ github.run_number }}.zip
+          asset_content_type: application/zip
+          asset_label: hello-maven-v${{ github.run_number }}.zip
 
-      - name: 'Write Upload URL To File'
-#        if: contains(github.ref, 'v')
-        run: |
-          echo "${{steps.create_release.outputs.upload_url}}" > upload_url.txt
 
-      - name: 'Publish Upload URL'
-#        if: contains(github.ref, 'v')
-        uses: actions/upload-artifact@v2-preview
-        with:
-          name: 'upload_url.txt'
-          path: 'upload_url.txt'
+#      - name: 'Upload Release Asset'
+##        if: contains(github.ref, 'v')
+#        id: upload-release-asset
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{secrets.RELEASE_TOKEN}}
+#        with:
+#          upload_url: ${{steps.create_release.outputs.upload_url}}
+#          asset_path: target/hello-maven-release.zip
+#          asset_name: hello-maven-release.zip
+#          asset_content_type: application/zip #java-archive
+#
+#      - name: 'Write Upload URL To File'
+##        if: contains(github.ref, 'v')
+#        run: |
+#          echo "${{steps.create_release.outputs.upload_url}}" > upload_url.txt
+#
+#      - name: 'Publish Upload URL'
+##        if: contains(github.ref, 'v')
+#        uses: actions/upload-artifact@v2-preview
+#        with:
+#          name: 'upload_url.txt'
+#          path: 'upload_url.txt'
 
 #  - name: Release
 #      uses: qcastel/github-actions-maven-release@master
