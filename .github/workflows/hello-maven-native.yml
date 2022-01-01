@@ -48,11 +48,11 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: 'Download asset'
-        uses: actions/download-artifact@v2
-        with:
-          name: hello-maven-release
-
+#      - name: 'Download asset'
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: hello-maven-release
+#
       - run: |
           ls -a
           tree -L 3
