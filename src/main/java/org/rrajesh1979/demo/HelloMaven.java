@@ -10,4 +10,8 @@ public class HelloMaven {
         System.out.println(StringUtils.capitalize(MESSAGE));
         return MESSAGE;
     }
+
+    public static void main(String[] args) {
+        System.out.println(MESSAGE + " from main method of HelloMaven!!!!");
+    }
 }
