@@ -25,8 +25,8 @@ jobs:
         uses: actions/upload-artifact@v2-preview
         with:
           name: 'hello-maven-release'
-          path: target/hello-maven-release.jar
-      #        target-directory: '{{ github.workflow.event.workflow_job.job }}'
+          path: hello-maven*.jar
+          target-directory: '{{ github.workflow.event.workflow_job.job }}'
 
       - name: 'Create Release'
         if: contains(github.ref, 'v')
