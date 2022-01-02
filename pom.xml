@@ -526,7 +526,7 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <imageName>hello-maven</imageName>
+                            <imageName>hello-maven-${project.version}${executable-suffix}</imageName>
                             <mainClass>org.rrajesh1979.demo.HelloMaven</mainClass>
                             <buildArgs>
                                 <buildArg>--no-fallback</buildArg>
