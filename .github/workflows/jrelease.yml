@@ -87,6 +87,7 @@ jobs:
         exclude:
           # Exclude GraalVM native image builds
           # Temporarily excluding Unix and Windows builds for testing
+          # TODO: Remove this exclusion once we have native image builds for all platforms
           - os: ubuntu-latest
             gu-binary: gu
           - os: ubuntu-latest
