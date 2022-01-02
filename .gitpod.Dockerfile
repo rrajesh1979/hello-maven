@@ -1,3 +1,3 @@
-FROM gitpod/workspace-base
+FROM gitpod/workspace-full
 
 #RUN bash -c "/home/gitpod/.sdkman/bin/sdk install java 21.3.0.r17-grl"
