@@ -1,4 +1,4 @@
-name: hello-maven-native
+name: Native build
 on:
   push:
     tags:
