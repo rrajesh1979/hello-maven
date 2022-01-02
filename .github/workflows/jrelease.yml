@@ -143,6 +143,7 @@ jobs:
       - run: |
           ls -a
           ls -a target
+          pwd
 
       - name: 'Create distribution'
         run: ./mvnw -B --file pom.xml -Pdist package -DskipTests
