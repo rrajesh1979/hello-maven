@@ -17,3 +17,5 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/rrajesh1979/hello-maven)
 ![GitHub watchers](https://img.shields.io/github/watchers/rrajesh1979/hello-maven)
 
+
+[![setup automated](https://img.shields.io/badge/Gitpod-ready_to_code-orange?logo=gitpod)](https://gitpod.io/from-referrer/)
