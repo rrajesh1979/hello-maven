@@ -85,12 +85,18 @@ jobs:
         os: [ ubuntu-latest, macOS-latest, windows-latest ]
         gu-binary: [ gu, gu.cmd ]
         exclude:
+          # Exclude GraalVM native image builds
+          # Temporarily excluding Unix and Windows builds for testing
+          - os: ubuntu-latest
+            gu-binary: gu
           - os: ubuntu-latest
             gu-binary: gu.cmd
           - os: macos-latest
             gu-binary: gu.cmd
           - os: windows-latest
             gu-binary: gu
+          - os: windows-latest
+            gu-binary: gu.cmd
     runs-on: ${{ matrix.os }}
 
     steps:
