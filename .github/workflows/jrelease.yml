@@ -143,7 +143,6 @@ jobs:
       - run: |
           ls -a
           ls -a target
-          echo "${{ project.build.directory }}"
 
       - name: 'Create distribution'
         run: ./mvnw -B --file pom.xml -Pdist package -DskipTests
