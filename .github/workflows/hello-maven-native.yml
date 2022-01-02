@@ -10,12 +10,12 @@ jobs:
     name: 'Build Non-Windows Image'
     strategy:
       matrix:
-        os: [ 'ubuntu-latest', 'macos-latest' ]
+        os: [ 'macos-latest' ] #'ubuntu-latest'
         gu-binary: [ gu ]
         include:
-          - os: 'ubuntu-latest'
-            gu-binary: gu
-            label: 'linux'
+#          - os: 'ubuntu-latest'
+#            gu-binary: gu
+#            label: 'linux'
           - os: 'macos-latest'
             gu-binary: gu
             label: 'mac'
