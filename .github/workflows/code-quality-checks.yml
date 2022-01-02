@@ -6,15 +6,22 @@ jobs:
     steps:
       - run: echo "🔎 Checking code quality of repository ${{ github.repository }}."
 
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+
+      - name: 'Setup Java 17'
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+          cache: 'maven'
+
+      - name: 'Maven Build'
+        run: |
+          ./mvnw -B --file pom.xml verify
+
       - name: 'Upload coverage to Codecov'
-      uses: codecov/codecov-action@v2
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        verbose: true
-        #          directory: ./coverage/reports/
-        #          env_vars: OS,PYTHON
-        #          fail_ci_if_error: true
-        #          files: ./coverage1.xml,./coverage2.xml
-        #          flags: unittests
-        #          name: codecov-umbrella
-        #          path_to_write_report: ./coverage/codecov_report.txt
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+
