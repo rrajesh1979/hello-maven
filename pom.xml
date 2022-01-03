@@ -100,7 +100,14 @@
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
-
+        <!-- detect OS classifier, needed for distribution Zip file -->
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.7.0</version>
+            </extension>
+        </extensions>
         <pluginManagement>
             <plugins>
                 <plugin>
