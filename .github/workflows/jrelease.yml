@@ -95,10 +95,10 @@ jobs:
             gu-binary: gu
           # Temporarily excluding builds for testing
           # TODO: Remove this exclusion once we have native image builds for all platforms
-          - os: ubuntu-latest
-            gu-binary: gu
-          - os: macos-latest
-            gu-binary: gu
+#          - os: ubuntu-latest
+#            gu-binary: gu
+#          - os: macos-latest
+#            gu-binary: gu
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -140,10 +140,10 @@ jobs:
       - name: 'Build Native Image'
         run: ./mvnw -B --file pom.xml -Pnative package
 
-      - run: |
-          dir
-          dir target
-          pwd
+#      - run: |
+#          dir
+#          dir target
+#          pwd
 
 #      - run: |
 #          ls -a

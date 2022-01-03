@@ -533,7 +533,7 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <imageName>hello-maven-${project.version}${executable-suffix}</imageName>
+                            <imageName>hello-maven-${project.version}</imageName>
                             <mainClass>org.rrajesh1979.demo.HelloMaven</mainClass>
                             <buildArgs>
                                 <buildArg>--no-fallback</buildArg>
@@ -576,9 +576,9 @@
                     <family>windows</family>
                 </os>
             </activation>
-<!--            <properties>-->
-<!--                <executable-suffix>.exe</executable-suffix>-->
-<!--            </properties>-->
+            <properties>
+                <executable-suffix>.exe</executable-suffix>
+            </properties>
         </profile>
 
         <profile>
