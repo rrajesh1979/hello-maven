@@ -140,11 +140,11 @@ jobs:
       - name: 'Build Native Image'
         run: ./mvnw -B --file pom.xml -Pnative package
 
-      - run: |
-          ls -a
-          ls -a target
-          pwd
-
+#      - run: |
+#          ls -a
+#          ls -a target
+#          pwd
+#
       - name: 'Create distribution'
         run: ./mvnw -B --file pom.xml -Pdist package -DskipTests
 
