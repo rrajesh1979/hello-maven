@@ -576,9 +576,9 @@
                     <family>windows</family>
                 </os>
             </activation>
-            <properties>
-                <executable-suffix>.exe</executable-suffix>
-            </properties>
+<!--            <properties>-->
+<!--                <executable-suffix>.exe</executable-suffix>-->
+<!--            </properties>-->
         </profile>
 
         <profile>
